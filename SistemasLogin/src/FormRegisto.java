@@ -1,5 +1,10 @@
 
 import static java.lang.Character.isDigit;
+import static java.lang.Character.isLetter;
+import static java.lang.Character.isLowerCase;
+import static java.lang.Character.isUpperCase;
+import static java.lang.Character.toLowerCase;
+import static java.lang.Character.toUpperCase;
 import javax.swing.JOptionPane;
 
 /*
@@ -182,8 +187,12 @@ public class FormRegisto extends javax.swing.JFrame {
         if(nome.equals("") || email.equals("") || morada.equals("") ||
                 tele.equals("") || nif.equals("") || pass.equals("") ||
                 rePass.equals("")){
-        mensagemErro("teste");
+        mensagemErro("registo inválido");
         }else{
+            if(!validaNome(nome)){
+                mensagemErro("o campo nome tem "
+                + "de ter 2 letras no minimo e só letras");
+            }
             if(!validaCampoNumerico(tele)){
                 mensagemErro("o campo telemóvel tem "
                 + "de ser numérico e ter 9 digitos");
@@ -191,6 +200,22 @@ public class FormRegisto extends javax.swing.JFrame {
             if(!validaCampoNumerico(nif)){
                 mensagemErro("o campo nif tem "
                 + "de ser numérico e ter 9 digitos");
+            }
+            if(!validaEmail(email)){
+                mensagemErro("mail inválido");
+            }
+            if(!validaMorada(morada)){
+                mensagemErro("o campo morada tem "
+                + "de ter 5 caracteres alfanumericos no minimo");
+            }
+            if(!validaPass(pass)){
+                mensagemErro("password tem de ter "
+                + "no minimo 8 caracteres, 1 maiuscula, 1 minuscula "
+                + "1 algarismo e 1 caracter especial");
+            }
+            if(!pass.equals(rePass)){
+                mensagemErro("confirmação de password "
+                + "tem de ser igual à password");
             }
         }
         //nome >= 2 caracteres
@@ -257,14 +282,14 @@ public class FormRegisto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validaCampoNumerico(String tele) {
-        int x, cont= 0, t= tele.length();
+    private boolean validaCampoNumerico(String valor) {
+        int x, cont= 0, t= valor.length();
         char c;
         if(t!=9)
             return false;
         else{
           for(x=0; x<t; x++){
-              c= tele.charAt(x); 
+              c= valor.charAt(x); 
               if(isDigit(c))
                   cont++;
           }
@@ -273,4 +298,79 @@ public class FormRegisto extends javax.swing.JFrame {
         }
         return true;
     }
+    private boolean validaNome(String valor) {
+        int x, cont= 0, t= valor.length();
+        char c;
+        if(t<2)
+            return false;
+        else{
+            for(x=0; x<t; x++){
+                c= valor.charAt(x);
+                if(c== ' ' && x!= 0){
+                    cont++;
+                    continue;
+            }
+                if(isLetter(c))
+                    cont++;
+            }
+            if(t!= cont)
+                return false;
+        }
+        return true;    
+    }
+    private boolean validaEmail(String valor){
+        int ar= valor.indexOf('@');
+        int p= valor.indexOf('.', ar);
+        int arr= valor.indexOf('@', ar+1);
+        int po= valor.indexOf('.', p+1);
+        int c= valor.indexOf(' ');
+        
+        if(ar== -1 || p== -1 || arr!= -1 || po!= -1 || c!= -1)
+            return false;
+        else{
+            return true;
+            }
+        }
+    private boolean validaMorada(String valor){
+        int t= valor.length();
+        
+        if(t<5)
+            return false;
+        else{
+            return true;
+            }
+        }
+    private boolean validaPass(String valor){
+        int x, spec= 0, nrs= 0, max= 0, min= 0, t= valor.length();
+        char c;
+        
+        if(t<8)
+            return false;
+        else{
+          for(x=0; x<t; x++){
+                c= valor.charAt(x);
+                if(c== ' '){
+                    return false;
+                }
+                if(isDigit(c)){
+                    nrs++;
+                }
+                if(isUpperCase(c)){
+                    max++;
+                }
+                if(isLowerCase(c)){
+                    min++;
+                }
+                if(!isLetter(c) && !isDigit(c)){
+                    spec++;
+                }
+            }
+            if(max<1 || min<1 || nrs<1 || spec<1)
+                return false;
+            else{
+                return true;
+            }       
+        }
+    }
 }
+
