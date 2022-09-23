@@ -47,8 +47,8 @@
                           <Component id="ctxNif" alignment="0" pref="220" max="32767" attributes="0"/>
                           <Component id="ctxTele" max="32767" attributes="0"/>
                           <Component id="ctxNome" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ctxPass" max="32767" attributes="0"/>
-                          <Component id="ctxRePass" max="32767" attributes="0"/>
+                          <Component id="ctxPass" alignment="0" max="32767" attributes="0"/>
+                          <Component id="ctxRePass" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -156,13 +156,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="ctxMorada">
     </Component>
-    <Component class="javax.swing.JTextField" name="ctxPass">
-    </Component>
-    <Component class="javax.swing.JTextField" name="ctxRePass">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ctxRePassActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -182,6 +175,16 @@
     <Component class="javax.swing.JTextField" name="ctxTele">
     </Component>
     <Component class="javax.swing.JTextField" name="ctxNif">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="ctxPass">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="ctxRePass">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jPasswordField2"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

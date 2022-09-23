@@ -44,12 +44,12 @@ public class FormRegisto extends javax.swing.JFrame {
         ctxNome = new javax.swing.JTextField();
         ctxEmail = new javax.swing.JTextField();
         ctxMorada = new javax.swing.JTextField();
-        ctxPass = new javax.swing.JTextField();
-        ctxRePass = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         ctxTele = new javax.swing.JTextField();
         ctxNif = new javax.swing.JTextField();
+        ctxPass = new javax.swing.JPasswordField();
+        ctxRePass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,12 +74,6 @@ public class FormRegisto extends javax.swing.JFrame {
 
         jLabel6.setText("Reescreva Password");
 
-        ctxRePass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ctxRePassActionPerformed(evt);
-            }
-        });
-
         jButton2.setBackground(new java.awt.Color(51, 102, 255));
         jButton2.setText("Validar Dados");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +83,10 @@ public class FormRegisto extends javax.swing.JFrame {
         });
 
         jLabel7.setText("Telemóvel");
+
+        ctxPass.setText("jPasswordField1");
+
+        ctxRePass.setText("jPasswordField2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,10 +165,6 @@ public class FormRegisto extends javax.swing.JFrame {
         this.dispose();
         log.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void ctxRePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxRePassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ctxRePassActionPerformed
 
     private void mensagemErro(String erro){
         JOptionPane.showMessageDialog(null, erro, "Erro Validação", JOptionPane.ERROR_MESSAGE);
@@ -268,8 +262,8 @@ public class FormRegisto extends javax.swing.JFrame {
     private javax.swing.JTextField ctxMorada;
     private javax.swing.JTextField ctxNif;
     private javax.swing.JTextField ctxNome;
-    private javax.swing.JTextField ctxPass;
-    private javax.swing.JTextField ctxRePass;
+    private javax.swing.JPasswordField ctxPass;
+    private javax.swing.JPasswordField ctxRePass;
     private javax.swing.JTextField ctxTele;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
