@@ -322,10 +322,9 @@ public class FormRegisto extends javax.swing.JFrame {
         int ar= valor.indexOf('@');
         int p= valor.indexOf('.', ar);
         int arr= valor.indexOf('@', ar+1);
-        int po= valor.indexOf('.', p+1);
         int c= valor.indexOf(' ');
         
-        if(ar== -1 || p== -1 || arr!= -1 || po!= -1 || c!= -1)
+        if(ar== -1 || p== -1 || arr!= -1 || c!= -1)
             return false;
         else{
             return true;
