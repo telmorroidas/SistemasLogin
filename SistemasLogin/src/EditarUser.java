@@ -1,6 +1,9 @@
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.Character.isDigit;
@@ -9,6 +12,9 @@ import static java.lang.Character.isLowerCase;
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -20,13 +26,15 @@ import javax.swing.JOptionPane;
  *
  * @author fcorte-real
  */
-public class FormRegisto extends javax.swing.JFrame {
+public class EditarUser extends javax.swing.JFrame {
 
     /**
      * Creates new form FormRegisto
      */
-    public FormRegisto() {
+    public EditarUser() {
         initComponents();
+        preencherFormulario();
+        
     }
 
     /**
@@ -79,6 +87,12 @@ public class FormRegisto extends javax.swing.JFrame {
         jLabel5.setText("Password");
 
         jLabel6.setText("Reescreva Password");
+
+        ctxNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ctxNomeActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(51, 102, 255));
         jButton2.setText("Validar Dados");
@@ -252,6 +266,10 @@ public class FormRegisto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void ctxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ctxNomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -397,7 +415,34 @@ public class FormRegisto extends javax.swing.JFrame {
             }       
         }
     }
-
+    private void preencherFormulario() {
+        File ficheiro = new File (Login.user+".txt");
+        FileReader fr;
+        String[]lista = new String[7];
+        int cont = 0;
+        try {
+            fr = new FileReader(ficheiro);
+            BufferedReader br = new BufferedReader(fr);
+            while (br.ready()){
+                lista[cont]= br.readLine();
+                cont++;
+            }
+            lista[cont]= lista[0];
+            ctxPass.setText(lista[0]);
+            ctxRePass.setText(lista[0]);
+            ctxNome.setText(lista[1]);
+            ctxEmail.setText(lista[4]);
+            ctxMorada.setText(lista[5]);
+            ctxNif.setText(lista[3]);
+            ctxTele.setText(lista[2]);
+            ctxLogin.setText(Login.user);    
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(EditarUser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(EditarUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
  
 }  
 
