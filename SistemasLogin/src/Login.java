@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -136,8 +140,32 @@ public static String user;
         String pass = ctxPassword.getText();
         if(user.equals("")|| pass.equals(""))
             JOptionPane.showMessageDialog(null, "preencha os campos de login e password", "erro", JOptionPane.ERROR_MESSAGE);
-            else{
-        File ficheiro= new File(user+".txt");
+        else{  
+            
+            
+            try {
+                System.out.println("login "+ctxUser.getText()+"\n password "+ctxPassword.getText());
+                String update = "SELECT * FROM utilizador WHERE login = '"+ctxUser.getText()+"' and password = '"+ctxPassword.getText()+"'";
+                Connection liga= LigaBD.ligacao();
+                PreparedStatement ps;
+                ps = liga.prepareStatement(update);
+                //ps = liga.prepareStatement(update);            
+                ResultSet rs= ps.executeQuery();
+                //rs.first();
+                
+                if(rs.next()){
+                    MenuOpcoes MO = new MenuOpcoes();
+                    MO.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "dados de login inválidos", "erro", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        /*File ficheiro= new File(user+".txt");
             try {
                 if(ficheiro.exists()){
                 FileReader fr = new FileReader(ficheiro);
@@ -165,7 +193,7 @@ public static String user;
                 }
                 }catch (IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

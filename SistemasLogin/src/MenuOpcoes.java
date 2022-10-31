@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -71,6 +73,11 @@ public class MenuOpcoes extends javax.swing.JFrame {
         });
 
         jButton5.setText("Sair");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,13 +122,16 @@ public class MenuOpcoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    File ficheiro= new File("C:\\Users\\fcorte-real\\Desktop\\ti827-10789\\SistemasLogin\\SistemasLogin\\SistemasLogin");
-    File [] lista= ficheiro.listFiles();
-    System.out.println(">>> utilizadores <<<");
-    for(int x=0;x<lista.length;x++){
-        if(lista[x].getName().endsWith(".txt"))
-        System.out.println(lista[x].getName().replace(".txt",""));
-    }
+//    File ficheiro= new File("C:\\Users\\fcorte-real\\Desktop\\ti827-10789\\SistemasLogin\\SistemasLogin\\SistemasLogin");
+//    File [] lista= ficheiro.listFiles();
+//    System.out.println(">>> utilizadores <<<");
+//    for(int x=0;x<lista.length;x++){
+//        if(lista[x].getName().endsWith(".txt"))
+//        System.out.println(lista[x].getName().replace(".txt",""));
+//    }
+        Tabela ver = new Tabela();
+        ver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -156,19 +166,15 @@ public class MenuOpcoes extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String user;
         user = Login.user;
-
-        File ficheiro = new File (Login.user+".txt");
-        
-        if (ficheiro.delete()){
-            System.out.println("utilizador eliminado");
-            Login log = new Login();
-            this.dispose();
-            log.setVisible(true);           
-        }
-        else{
-            System.out.println("falha na eliminação");
-        }
+        String query= "DELETE FROM utilizador WHERE login ='"+user+"'";
+        LigaBD.removerUtilizador(query);       
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Login sair = new Login();
+        sair.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

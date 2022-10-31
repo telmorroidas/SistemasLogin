@@ -12,6 +12,10 @@ import static java.lang.Character.isLowerCase;
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,10 +35,10 @@ public class EditarUser extends javax.swing.JFrame {
     /**
      * Creates new form FormRegisto
      */
-    public EditarUser() {
+    public EditarUser(){
         initComponents();
         preencherFormulario();
-        
+        editaUtilizador();
     }
 
     /**
@@ -264,6 +268,7 @@ public class EditarUser extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+        LigaBD.atualizaUtilizador(nome, email, morada, Integer.parseInt(tele), Integer.parseInt(nif), pass, rePass);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ctxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxNomeActionPerformed
@@ -442,6 +447,28 @@ public class EditarUser extends javax.swing.JFrame {
             Logger.getLogger(EditarUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    public void editaUtilizador(){
+        Connection conn = LigaBD.ligacao();
+        String query= "SELECT * FROM utilizador WHERE login = '"+Login.user+"'";
+        PreparedStatement ps;
+        try {
+            ps = conn.prepareStatement(query);
+            ResultSet rs= ps.executeQuery();
+        while(rs.next()){
+            System.out.println("entrei");
+            ctxNome.setText(rs.getString(2));
+            ctxEmail.setText(rs.getString(3));
+            ctxMorada.setText(rs.getString(4));
+            ctxTele.setText(""+rs.getInt(5));
+            ctxNif.setText(""+rs.getInt(6));
+            ctxLogin.setText(rs.getString(7));
+            ctxPass.setText(rs.getString(8));
+            ctxRePass.setText(rs.getString(8));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarUser.class.getName()).log(Level.SEVERE, null, ex);
+        }       
     }
  
 }  

@@ -9,6 +9,9 @@ import static java.lang.Character.isLowerCase;
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -250,6 +253,11 @@ public class FormRegisto extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+        try {
+            LigaBD.registaUtilizador(nome, email, morada, Integer.parseInt(tele), Integer.parseInt(nif), log, pass);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormRegisto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -394,11 +402,9 @@ public class FormRegisto extends javax.swing.JFrame {
                 return false;
             else{
                 return true;
-            }       
+            } 
         }
     }
-
- 
 }  
 
 
